@@ -1,0 +1,9 @@
+FROM openjdk:21
+
+VOLUME /tmp
+
+COPY target/spring-boot-cognito-eks-0.7.0.jar spring-boot-cognito-eks.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","/spring-boot-cognito-eks.jar"]
