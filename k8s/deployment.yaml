@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-cognito-eks
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-cognito-eks
+  template:
+    metadata:
+      labels:
+        app: spring-boot-cognito-eks
+    spec:
+      containers:
+        - name: spring-boot-cognito-eks
+          image: your-account-id.dkr.ecr.your-region.amazonaws.com/spring-boot-cognito-eks:0.0.1
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "dev"
