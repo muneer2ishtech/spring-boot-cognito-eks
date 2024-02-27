@@ -115,6 +115,25 @@ Now, you have created and attached an Internet Gateway to your VPC.
 - Create separate security groups for the resources in the public and private subnets.
 - Configure inbound and outbound rules based on your security requirements.
 
+#### Security Group for Spring Boot Application:
+
+1. Open the [Amazon VPC Console](https://console.aws.amazon.com/vpc/).
+2. In the left navigation pane, click on "Security Groups."
+3. Select the Security Group associated with the Spring Boot Application.
+
+##### Inbound Rules:
+
+- Rule 1: Allow traffic on Port 8080.
+  - Type: Custom TCP Rule
+  - Protocol: TCP
+  - Port Range: 8080
+  - Source: Anywhere (0.0.0.0/0 for all IP addresses)
+- You can add more for 443, 8443 etc
+
+#### Outbound Rules:
+
+- Allow outbound traffic as needed for your application. For example, allow all outbound traffic (0.0.0.0/0) or restrict it based on specific requirements.
+
 ## Step 8: Update Subnet Route Table Association (Optional)
 
 1. Navigate to the "Subnets" section in the VPC console.
